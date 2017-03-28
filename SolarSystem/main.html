@@ -24,15 +24,14 @@
         var width = game.getWH().w;
         var height = game.getWH().h;
 
-        var back = game.newImageObject({
-            file: 'blackSpace.jpg'
-        });
-
-        var route = game.newPolygonObject( {
-            points : [],
-            pointColor : "#128500",
-            strokeWidth : 0.001,
-        });
+        var resolution = 5000, x, y, textureNum = 5, fon = [];
+        for(var x = 0; x < textureNum; x++){
+            for(var y = 0; y < textureNum; y++){
+                fon.push([game.newImageObject({
+                    file: 'blackSpace.jpg',x:x*resolution,y:y*resolution, w: resolution, h: resolution
+                }),''])
+            }
+        }
 
         var spacing = 15;
 
@@ -52,89 +51,143 @@
             font: 'serif',
             padding: 20,
             visible: false
-        })
+        });
+
+
 
         var sun = game.newCircleObject({
-            radius: 696/2, fillColor: '#f3ff35'
+            radius: 696/2, visible: false, fillColor: '#f3ff35'
+
         });
-        sun.setUserData({name: 'Sun'});
+        sun.setUserData({name: 'Sun',
+                         texture: game.newImageObject({
+                             file: 'Sun.png'
+                         })
+        });
 
         var mercury = game.newCircleObject({
-            radius: 2.4/2, fillColor: '#ffad48'
+            radius: 2.4, visible: false, fillColor: '#ffad48'
         });
-        mercury.setUserData({name: 'Mercury', orbit:(sun.radius + ((width-sun.radius)/10)), speed: 0.47});
+        mercury.setUserData({name: 'Mercury',
+                            texture: game.newImageObject({
+                                file: 'mercury.png'
+                            }),
+            orbit:(sun.radius + ((width-sun.radius)/10)), speed: 0.47});
 
         var venus = game.newCircleObject({
-            radius: 6/2, fillColor: '#c5a35c'
+            radius: 6, visible: false, fillColor: '#c5a35c'
         });
-        venus.setUserData({name: 'Venus', orbit:(sun.radius + ((width-sun.radius)/10*2)), speed: 0.35});
+        venus.setUserData({name: 'Venus',
+                            texture: game.newImageObject({
+                                file: 'venus.png'
+                            }),
+            orbit:(sun.radius + ((width-sun.radius)/10*2)), speed: 0.35});
 
         var earth = game.newCircleObject({
-            radius: 6.3/2, fillColor: '#3753ff'
+            radius: 6.3, visible: false,  fillColor: '#3753ff'
         });
-        earth.setUserData({name: 'Earth', orbit: (sun.radius + ((width-sun.radius)/10*3)),speed: 0.29});
+        earth.setUserData({name: 'Earth',
+                            texture: game.newImageObject({
+                                file: 'earth.png'
+                            }),
+            orbit: (sun.radius + ((width-sun.radius)/10*3)),speed: 0.29});
 
         var moon = game.newCircleObject({
-            radius: 1.7/2, fillColor: '#fdfdff'
+            radius: 1.7, visible: false, fillColor: '#fdfdff'
         });
-        moon.setUserData({name: 'Moon',orbit: earth.radius + 5, speed: 0.01});
+        moon.setUserData({name: 'Moon',
+                            texture: game.newImageObject({
+                                file: 'moon.png'
+                            }),
+            orbit: earth.radius * 2, speed: 0.01});
 
         var mars = game.newCircleObject({
-            radius: 3.4/2, fillColor: '#ff530b'
+            radius: 3.4, visible: false, fillColor: '#ff530b'
         });
-        mars.setUserData({name: 'Mars', orbit: (sun.radius + ((width-sun.radius)/10*3.7)), speed: 0.24});
+        mars.setUserData({name: 'Mars',
+                            texture: game.newImageObject({
+                                file: 'mars.png'
+                            }),
+            orbit: (sun.radius + ((width-sun.radius)/10*3.7)), speed: 0.24});
 
         var jupiter = game.newCircleObject({
-            radius: 71.3/2, fillColor: '#95b8ff'
+            radius: 71.3, visible: false, fillColor: '#95b8ff'
         });
-        jupiter.setUserData({name: 'Jupiter', orbit: (sun.radius + ((width-sun.radius)/10*5)),speed: 0.13});
+        jupiter.setUserData({name: 'Jupiter',
+                            texture: game.newImageObject({
+                                file: 'jupiter.png'
+                            }),
+            orbit: (sun.radius + ((width-sun.radius)/10*5)),speed: 0.13});
 
         var saturn = game.newCircleObject({
-            radius: 60.1/2, fillColor: '#d6c480'
+            radius: 60.1, visible: false, fillColor: '#d6c480'
         });
-        saturn.setUserData({name: 'Saturn', orbit: (sun.radius + ((width-sun.radius)/10*6.5)), speed: 0.09});
+        saturn.setUserData({name: 'Saturn',
+                            texture: game.newImageObject({
+                                file: 'saturn.png'
+                            }),
+            orbit: (sun.radius + ((width-sun.radius)/10*6.5)), speed: 0.09});
 
         var uran = game.newCircleObject({
-            radius: 26.5/2, fillColor: '#4ffaff'
+            radius: 26.5, visible: false, fillColor: '#4ffaff'
         });
-        uran.setUserData({name: 'Uranus', orbit: (sun.radius + ((width-sun.radius)/10*7.5)), speed: 0.06});
+        uran.setUserData({name: 'Uranus',
+                            texture: game.newImageObject({
+                                file: 'uranus.png'
+                            }),
+            orbit: (sun.radius + ((width-sun.radius)/10*7.5)), speed: 0.06});
 
         var neptune = game.newCircleObject({
-            radius: 24.7/2, fillColor: '#5d57ff'
+            radius: 24.7, visible: false, fillColor: '#5d57ff'
         });
-        neptune.setUserData({name: 'Neptune', orbit: (sun.radius + ((width-sun.radius)/10*8.5)), speed: 0.05});
+        neptune.setUserData({name: 'Neptune',
+                            texture: game.newImageObject({
+                                file: 'neptune.png'
+                            }),
+            orbit: (sun.radius + ((width-sun.radius)/10*8.5)), speed: 0.05});
 
         var pluton = game.newCircleObject({
-            radius: 2/2, fillColor: '#aba7a8'
+            radius: 2, visible: false, fillColor: '#aba7a8'
         });
-        pluton.setUserData({name: 'Pluto', orbit: (sun.radius + ((width-sun.radius)/10*9)), speed: 0.04});
+        pluton.setUserData({name: 'Pluto',
+                            texture: game.newImageObject({
+                                file: 'pluto.png'
+                            }),
+            orbit: (sun.radius + ((width-sun.radius)/10*9)), speed: 0.04});
 
-        var defaultCamPos = p(width/2,height/2);
+        var defaultCamPos = p(resolution*textureNum/2,resolution*textureNum/2);
         sun.setPositionC(defaultCamPos);
-
-        function routeCreate(elem){
-            route.points.push(elem.getPositionC());
-        }
 
         var followMode = false;
         var currentPlanet = 0;
         var SolSysObj = [];
         SolSysObj.push(sun,mercury,venus,earth,moon,mars,jupiter,saturn,uran,neptune,pluton);
-        var routeDrawDelay = 0;
-
 
         game.newLoop('solarSys', function(){
             game.clear();
-            sun.setPositionC(defaultCamPos);
             var SSC = p(sun.getPosition().x + sun.radius, sun.getPosition().y + sun.radius);
-                routeDrawDelay++;
+            sun.texture.setPositionC(SSC);
+            sun.texture.w = sun.radius*2.4;
+            sun.texture.h = sun.radius*2.4;
 
-            back.setPositionC(sun.getPositionC());
+            SolSysObj.forEach(function (elem){
+                if(elem.name !== 'Saturn' || elem.name !== 'Uranus') {
+                    elem.texture.w = elem.radius * 2;
+                    elem.texture.h = elem.radius * 2;
+                }
+                elem.texture.setPositionC(p(elem.getPosition().x+elem.radius,elem.getPosition().y+elem.radius));
+            });
+
+            saturn.texture.w = saturn.radius * 4.4;
+            saturn.texture.h = saturn.radius * 2;
+            uran.texture.w = uran.radius * 2;
+            uran.texture.h = uran.radius * 4.5;
+
             info.setPosition(p(cam.getPosition().x + width - info.w - spacing, cam.getPosition().y + spacing));
             mercury.circlingC(SSC, mercury.orbit*scale, mercury.speed*scale);
             venus.circlingC(SSC, venus.orbit*scale, venus.speed*scale);
             earth.circlingC(SSC, earth.orbit*scale, earth.speed*scale);
-            moon.circlingC(earth.getPositionC(), moon.orbit*scale, moon.speed*scale);
+            moon.circlingC(earth.getPositionC(), moon.orbit*2*scale, moon.speed*scale);
             mars.circlingC(SSC, mars.orbit*scale, mars.speed*scale);
             jupiter.circlingC(SSC, jupiter.orbit*scale, jupiter.speed*scale);
             saturn.circlingC(SSC, saturn.orbit*scale, saturn.speed*scale);
@@ -142,21 +195,15 @@
             neptune.circlingC(SSC, neptune.orbit*scale, neptune.speed*scale);
             pluton.circlingC(SSC, pluton.orbit*scale, pluton.speed*scale);
 
-            back.draw();
-
-            //SolSysObj.forEach(routeCreate);
-
-//            if(routeDrawDelay % 30 === 0){
-//                SolSysObj.forEach(routeCreate);
-//            }
-//            route.draw();
+            for(var i in fon){
+                fon[i][0].draw();
+            }
 
             if(key.isDown( "PLUS" )){
                 scale = 1;
                 scale+=0.01;
                 SolSysObj.forEach(function (elem) {
                     elem.orbit *= scale;
-                    //elem.speed *= scale;
                     elem.radius *= scale;
                 });
             }
@@ -165,12 +212,14 @@
                 scale-=0.01;
                 SolSysObj.forEach(function (elem) {
                     elem.orbit *= scale;
-                    //elem.speed *= scale;
                     elem.radius *= scale;
                 });
             }
 
             js.OOP.drawArr(SolSysObj);
+            SolSysObj.forEach(function (elem){
+                elem.texture.draw();
+            });
 
             if(key.isPress("F")){
                 followMode = !followMode;
@@ -202,10 +251,11 @@
                 infoText.setPosition(info.getPosition());
                 info.draw();
                 infoText.draw();
-                cam.moveTimeC(SolSysObj[currentPlanet].getPositionC(),15);
-                //SolSysObj[currentPlanet].drawStaticBox();
+                cam.moveTimeC(p(SolSysObj[currentPlanet].getPosition().x + SolSysObj[currentPlanet].radius, SolSysObj[currentPlanet].getPosition().y + SolSysObj[currentPlanet].radius), 5);
             }else{
-                cam.moveTimeC( mouse.getPosition(), 30);
+                if(mouse.isDown("LEFT")) {
+                    cam.moveTimeC(mouse.getPosition(), 30);
+                }else cam.moveTimeC(SSC, 30);
             }
 
         });
