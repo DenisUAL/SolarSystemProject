@@ -11,6 +11,7 @@
         var js = new PointJS('2d',100,100,{backgroundColor: 'black'});
         var game = js.game;
         var sys = js.system;
+        //sys.setSmoothing(true);
         sys.initFullPage();
         var cam = js.camera;
         var mouse = js.mouseControl;
@@ -156,15 +157,21 @@
             orbit: (sun.radius + ((width-sun.radius)/10*9)), speed: 0.04});
 
         var defaultCamPos = p(resolution*textureNum/2,resolution*textureNum/2);
-        sun.setPositionC(defaultCamPos);
 
         var followMode = false;
         var currentPlanet = 0;
         var SolSysObj = [];
         SolSysObj.push(sun,mercury,venus,earth,moon,mars,jupiter,saturn,uran,neptune,pluton);
 
+//        SolSysObj.forEach(function(elem){
+//           elem.setUserData({ force: function(){
+//
+//           }})
+//        });
+
         game.newLoop('solarSys', function(){
             game.clear();
+            sun.setPosition(p(defaultCamPos.x - sun.radius,defaultCamPos.y - sun.radius));
             var SSC = p(sun.getPosition().x + sun.radius, sun.getPosition().y + sun.radius);
             sun.texture.setPositionC(SSC);
             sun.texture.w = sun.radius*2.4;
