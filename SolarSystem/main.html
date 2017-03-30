@@ -24,11 +24,11 @@
         var width = game.getWH().w;
         var height = game.getWH().h;
 
-        var resolution = 5000, x, y, textureNum = 5, fon = [];
+        var resolution = 5000, x, y, textureNum = 10, fon = [];
         for(var x = 0; x < textureNum; x++){
             for(var y = 0; y < textureNum; y++){
                 fon.push([game.newImageObject({
-                    file: 'blackSpace.jpg',x:x*resolution,y:y*resolution, w: resolution, h: resolution
+                    file: 'blackSpace.jpg',x:x*resolution,y:y*resolution, w: resolution-10, h: resolution-10
                 }),''])
             }
         }
@@ -99,7 +99,7 @@
                             texture: game.newImageObject({
                                 file: 'moon.png'
                             }),
-            orbit: earth.radius * 2, speed: 0.01});
+            orbit: earth.radius * 2, speed: 3.5});
 
         var mars = game.newCircleObject({
             radius: 3.4, visible: false, fillColor: '#ff530b'
@@ -187,7 +187,7 @@
             mercury.circlingC(SSC, mercury.orbit*scale, mercury.speed*scale);
             venus.circlingC(SSC, venus.orbit*scale, venus.speed*scale);
             earth.circlingC(SSC, earth.orbit*scale, earth.speed*scale);
-            moon.circlingC(earth.getPositionC(), moon.orbit*2*scale, moon.speed*scale);
+            moon.circlingC(p(earth.getPosition().x + earth.radius, earth.getPosition().y + earth.radius), moon.orbit*2*scale, moon.speed*scale);
             mars.circlingC(SSC, mars.orbit*scale, mars.speed*scale);
             jupiter.circlingC(SSC, jupiter.orbit*scale, jupiter.speed*scale);
             saturn.circlingC(SSC, saturn.orbit*scale, saturn.speed*scale);
@@ -199,17 +199,17 @@
                 fon[i][0].draw();
             }
 
-            if(key.isDown( "PLUS" )){
+            if(key.isDown( "PLUS" ) || mouse.isWheel('UP')){
                 scale = 1;
-                scale+=0.01;
+                scale+=0.05;
                 SolSysObj.forEach(function (elem) {
                     elem.orbit *= scale;
                     elem.radius *= scale;
                 });
             }
-            if(key.isDown('MINUS')){
+            if(key.isDown('MINUS') || mouse.isWheel('DOWN')){
                 scale = 1;
-                scale-=0.01;
+                scale-=0.05;
                 SolSysObj.forEach(function (elem) {
                     elem.orbit *= scale;
                     elem.radius *= scale;
